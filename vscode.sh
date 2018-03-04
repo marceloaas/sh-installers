@@ -10,7 +10,7 @@ wget --show-progress -O code.deb https://vscode-update.azurewebsites.net/latest/
 echo "========================================================="
 echo "Desinstalando versões anteriores"
 echo "========================================================="
-sudo apt-get purge code
+sudo apt-get -y purge code
 sudo apt-get autoremove
 sudo apt-get autoclean
 
