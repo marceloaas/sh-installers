@@ -1,10 +1,22 @@
 #!/bin/bash
 
 clear
+
 echo "========================================================="
 echo "Efetuando instalação do GIT"
 echo "========================================================="
-sudo apt-get -y install git
+
+OS="$(lsb_release -is)"
+
+cd /var/tmp
+
+if [ "$OS" == "Ubuntu" ]; then
+    apt-get -y install git
+fi
+
+if [ "$OS" == "Fedora" ]; then
+    dnf install git
+fi
 
 echo "========================================================="
 echo "Efetuando configuração padrão"
