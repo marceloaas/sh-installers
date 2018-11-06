@@ -1,30 +1,20 @@
 #!/bin/bash
 
-clear
-echo "========================================================="
-echo "Baixando última versão estável amd64 em /var/tmp"
-echo "========================================================="
+OS="$(lsb_release -is)"
+
 cd /var/tmp
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 
-echo "========================================================="
-echo "Desinstalando versões anteriores"
-echo "========================================================="
-sudo apt-get purge google-chrome
-sudo apt-get autoremove
-sudo apt-get autoclean
+if [ "$OS" == "Ubuntu" ]; then
+    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    apt-get purge google-chrome
+    dpkg -i google-chrome-stable_current_amd64.deb
+    apt-get -f -y install
+    rm google-chrome-stable_current_amd64.deb
+fi
 
-echo "========================================================="
-echo "Instalando nova versão"
-echo "========================================================="
-sudo dpkg -i google-chrome-stable_current_amd64.deb
-
-echo "========================================================="
-echo "Instalando dependências"
-echo "========================================================="
-sudo apt-get -f -y install
-
-echo "========================================================="
-echo "Removendo instalador"
-echo "========================================================="
-sudo rm google-chrome-stable_current_amd64.deb
+if [ "$OS" == "Fedora" ]; then
+    echo "eqweqew"
+    wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+    dnf google-chrome-stable_current_x86_64.rpm
+    rm google-chrome-stable_current_x86_64.rpm
+fi
