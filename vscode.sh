@@ -28,3 +28,5 @@ if [ "$OS" == "Fedora" ]; then
     dnf check-update
     sudo dnf install code
 fi
+
+xdg-mime default code.desktop text/plain
